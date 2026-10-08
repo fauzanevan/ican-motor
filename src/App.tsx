@@ -18,6 +18,8 @@ import {
   Lock
 } from 'lucide-react';
 import { siteConfig } from './data/siteConfig';
+const GOOGLE_SHEETS_API =
+  'https://script.google.com/macros/s/AKfycbzlDmwReeCWkPIftPqTDAJGie6ALZJ3eI54R1k5IZD8aQ5iPRJlGBs3NWGnrXVA2pcl_Q/exec';
 
 // Ikon Motor Kustom sebagai pengganti Lucide Motorcycle
 const MotorcycleIcon = ({ size = 24, className = "" }) => (
@@ -1084,6 +1086,43 @@ export default function App() {
   const [showTable, setShowTable] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  useEffect(() => {
+  const loadMotorData = async () => {
+    try {
+      const response = await fetch(
+        `${GOOGLE_SHEETS_API}?action=get&sheet=MOTOR`
+      );
+
+      const result = await response.json();
+
+      if (!result.success || !Array.isArray(result.data)) {
+        throw new Error('Data MOTOR dari Google Sheets tidak valid.');
+      }
+
+      setMotorsData((currentData) =>
+        currentData.map((motor) => {
+          const sheetMotor = result.data.find(
+            (item) => String(item.id) === String(motor.id)
+          );
+
+          if (!sheetMotor) return motor;
+
+          return {
+            ...motor,
+            name: sheetMotor.nama || motor.name,
+            otr: Number(sheetMotor.otr) || motor.otr,
+          };
+        })
+      );
+
+      console.log('Data motor berhasil dimuat dari Google Sheets.');
+    } catch (error) {
+      console.error('Gagal mengambil data Google Sheets:', error);
+    }
+  };
+
+  loadMotorData();
+}, []);
 
   // State baru untuk Fitur Gallery & Mode Admin
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
