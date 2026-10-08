@@ -2,27 +2,25 @@
 
 Website React + Vite + Tailwind untuk katalog dan simulasi kredit motor Honda.
 
-## Konsep data sederhana
-Repository GitHub dipakai sebagai tempat menyimpan:
-- `public/assets/` → logo, foto sales, banner, gambar motor.
-- `src/data/siteConfig.ts` → nama dealer, nama sales, WhatsApp, logo/foto yang dipakai.
-- `src/App.tsx` → tampilan dan data simulasi kredit.
+## Deploy ke GitHub + Vercel
 
-Ini adalah **static data store berbasis Git**, bukan database server. Setiap perubahan di GitHub akan ikut ter-deploy oleh Vercel.
+1. Upload isi folder project ini ke repository GitHub.
+2. Di Vercel pilih **Add New → Project** dan import repository tersebut.
+3. Framework: **Vite**.
+4. Root Directory: `./`.
+5. Build command: `npm run build`.
+6. Output directory: `dist`.
 
-## Jalankan lokal
-```bash
-npm install
-npm run dev
-```
+Tidak perlu Environment Variable untuk menjalankan versi sederhana ini.
 
-## Build production
-```bash
-npm run build
-```
+## Mengubah profil/dealer
 
-## Deploy Vercel
-Import repository GitHub ke Vercel. Framework preset: Vite. Build command: `npm run build`. Output directory: `dist`.
+Edit `src/data/siteConfig.ts`.
 
-## Catatan keamanan
-Password mode admin pada kode lama tidak aman untuk dijadikan sistem admin sungguhan. Versi ini mengambil password dari environment variable `VITE_ADMIN_PASSWORD`, tetapi nilai VITE tetap terkirim ke browser. Jadi fitur tersebut hanya cocok sebagai pengunci UI sederhana, **bukan autentikasi aman**. Untuk admin sungguhan gunakan backend/authentication.
+## Mengubah gambar
+
+Ganti file di `public/assets/` dengan nama yang sama.
+
+## Catatan admin
+
+Password admin pada versi sederhana ini adalah pengunci UI, bukan sistem autentikasi aman. Karena kode React dikirim ke browser, password dapat ditemukan oleh orang yang membongkar source aplikasi. Untuk admin sungguhan gunakan backend/authentication.

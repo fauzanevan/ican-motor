@@ -36,7 +36,8 @@ const SALES_NAME = siteConfig.salesName;
 const SALES_WA = siteConfig.salesWhatsAppDisplay;
 const WA_LINK = siteConfig.salesWhatsAppNumber;
 const DEALER_NAME = siteConfig.dealerName;
-const ADMIN_PASS = import.meta.env.VITE_ADMIN_PASSWORD || 'ubah-password-di-env';
+// UI-only admin lock. For real security, use a backend authentication service.
+const ADMIN_PASS = 'irsanselamatmotor2026';
 
 const dataMotor = [
   {
