@@ -1270,7 +1270,7 @@ export default function App() {
                         src={currentColor.img} 
                         alt={currentColor.name} 
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        onError={(e) => { e.target.src = 'https://placehold.co/800x600/f8fafc/64748b?text=Gambar+Tidak+Tersedia' }}
+                        onError={(e) => { e.currentTarget.src = 'https://placehold.co/800x600/f8fafc/64748b?text=Gambar+Tidak+Tersedia' }}
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2 bg-gray-50">
